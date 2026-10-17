@@ -12,7 +12,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(
         135deg,
-        #dbeafe,
+        #d1fae5,
         #86efac
     );
     overflow: hidden;
@@ -747,6 +747,7 @@ body {
     border-radius: 15px;
     margin-bottom: 15px;
 }
+
 
 @media (max-width: 600px) {
     .birthday-gif {
