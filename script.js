@@ -135,17 +135,16 @@ function turnBackToFront() {
 function createConfetti() {
     const pieces = 140;
 
-    const colours = [
-        "#6d28d9",
-        "#7c3aed",
-        "#8b5cf6",
-        "#a78bfa",
-        "#c4b5fd",
-        "#d8b4fe",
-        "#e9d5ff",
-        "#ffffff"
-    ];
-
+const colours = [
+    "#166534",
+    "#15803d",
+    "#16a34a",
+    "#4ade80",
+    "#86efac",
+    "#a7f3d0",
+    "#d1fae5",
+    "#ffffff"
+];
     for (let i = 0; i < pieces; i++) {
         const piece = document.createElement("span");
 
