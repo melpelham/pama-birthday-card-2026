@@ -1,0 +1,774 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        135deg,
+        #dbeafe,
+        #c4b5fd
+    );
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    text-align: center;
+}
+
+.title {
+    color: #5b21b6;
+    font-size: 26px;
+    margin-bottom: 50px;
+}
+
+.envelope-container {
+    width: 400px;
+    height: 280px;
+    margin: 0 auto;
+    cursor: pointer;
+    perspective: 1200px;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #e8f1ff;
+    border-radius: 10px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.card-wrapper {
+    position: absolute;
+    width: 360px;
+    height: 470px;
+    left: 20px;
+    bottom: 10px;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 2;
+    transform: translateY(0);
+    will-change: transform;
+}
+
+.envelope-container.open .card-wrapper {
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 2;
+    animation:
+        card-slide-out
+        3.5s
+        ease-in-out
+        forwards;
+}
+
+@keyframes card-slide-out {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-360px);
+    }
+
+    100% {
+        transform: translateY(65px);
+    }
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+}
+
+/* =========================
+   BOOK STYLE PAGES
+========================= */
+
+.card-page {
+    position: absolute;
+    inset: 0;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.22);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform-origin: left center;
+
+    backface-visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 3;
+
+    transition:
+        transform 0.85s
+        cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Current page */
+
+.card-page.active {
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: rotateY(0deg);
+
+    z-index: 5;
+}
+
+
+/* Page underneath */
+
+.card-page.next-page {
+    opacity: 1;
+
+    pointer-events: none;
+
+    transform: rotateY(0deg);
+
+    z-index: 4;
+}
+
+
+/* Page that is being turned */
+
+.card-page.turning {
+    opacity: 1;
+
+    pointer-events: none;
+
+    transform: rotateY(-180deg);
+
+    z-index: 6;
+}
+
+
+/* Page content */
+
+.card-page .message {
+    width: 100%;
+    height: 100%;
+
+    padding: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =========================
+   ORIGINAL CARD INSIDE
+========================= */
+
+.card-inside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.22);
+
+    z-index: 1;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    width: 100%;
+    height: 100%;
+
+    padding: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.heart {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.message h2 {
+    color: #6d28d9;
+    font-size: 28px;
+    line-height: 1.25;
+    margin-bottom: 25px;
+}
+
+.dear {
+    color: #7c3aed;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.message p {
+    color: #6d28d9;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.message .love {
+    color: #6d28d9;
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   FRONT COVER
+========================= */
+
+.card-front {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        145deg,
+        #6d28d9,
+        #a78bfa
+    );
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.25);
+
+    transform-origin: left center;
+
+    transition:
+        transform 1.2s ease;
+
+    backface-visibility: hidden;
+
+    z-index: 10;
+}
+
+.front-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+
+    padding: 30px;
+}
+
+
+/* =========================
+   HAPPY BIRTHDAY TEXT
+========================= */
+
+.birthday-words {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.word {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+}
+
+.word span {
+    display: inline-block;
+
+    font-size: 50px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    transform: scale(1);
+
+    transform-origin: center;
+
+    will-change: transform;
+}
+
+
+/* Birthday animation */
+
+.birthday-words.animate .word span {
+    animation:
+        birthday-pop
+        0.8s
+        ease-in-out
+        forwards;
+}
+
+@keyframes birthday-pop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.45);
+    }
+
+    60% {
+        transform: scale(1.45);
+    }
+
+    80% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================
+   TAP BUTTON
+========================= */
+
+.front-content > p {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.tap-card {
+    margin-top: 28px;
+
+    padding: 12px 24px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.2);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.5);
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   OPEN CARD
+========================= */
+
+.card.open .card-front {
+    transform: rotateY(-180deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   ENVELOPE FRONT
+========================= */
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+
+    background: #ddd6fe;
+
+    clip-path:
+        polygon(
+            0 0,
+            50% 55%,
+            100% 0,
+            100% 100%,
+            0 100%
+        );
+
+    border-radius: 10px;
+
+    z-index: 4;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding-bottom: 30px;
+
+    color: #5b21b6;
+
+    font-weight: bold;
+}
+
+.envelope-heart {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.envelope-front p {
+    font-size: 16px;
+}
+
+
+/* =========================
+   ENVELOPE FLAP
+========================= */
+
+.envelope-flap {
+    position: absolute;
+    inset: 0;
+
+    background: #a78bfa;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 55%
+        );
+
+    transform-origin: top center;
+
+    transition:
+        transform 0.9s
+        cubic-bezier(
+            0.4,
+            0,
+            0.2,
+            1
+        );
+
+    z-index: 5;
+}
+
+.envelope-container.open .envelope-flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+/* =========================
+   INSTRUCTIONS
+========================= */
+
+.instructions {
+    margin-top: 35px;
+
+    color: #5b21b6;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti-container {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 100;
+}
+
+.confetti-piece {
+    position: absolute;
+
+    top: -20px;
+
+    border-radius: 2px;
+
+    animation:
+        confetti-fall
+        3s
+        linear
+        forwards;
+
+    transform: rotate(0deg);
+}
+
+@keyframes confetti-fall {
+
+    0% {
+        transform:
+            translateY(-20px)
+            translateX(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(var(--drift))
+            rotate(360deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(
+                calc(var(--drift) * 1.5)
+            )
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 21px;
+        margin-bottom: 40px;
+    }
+
+    .envelope-container {
+        width: 90vw;
+        max-width: 360px;
+        height: 250px;
+    }
+
+    .card-wrapper {
+        width: calc(100% - 30px);
+        height: 420px;
+        left: 15px;
+    }
+
+    .envelope-container.open .card-wrapper {
+        animation:
+            card-slide-out-mobile
+            3.5s
+            ease-in-out
+            forwards;
+    }
+
+    @keyframes card-slide-out-mobile {
+
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-290px);
+        }
+
+        100% {
+            transform: translateY(65px);
+        }
+    }
+
+
+    /* Front cover */
+
+    .front-content {
+        padding: 20px;
+    }
+
+    .birthday-words {
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+
+    .word {
+        gap: 2px;
+    }
+
+    .word span {
+        font-size: 55px;
+    }
+
+    .front-content > p {
+        font-size: 20px;
+    }
+
+    .tap-card {
+        margin-top: 22px;
+        padding: 11px 20px;
+        font-size: 18px;
+    }
+
+
+    /* Pages */
+
+    .card-page .message {
+        padding: 25px 20px;
+    }
+
+    .message {
+        padding: 25px 20px;
+    }
+
+    .heart {
+        font-size: 40px;
+        margin-bottom: 18px;
+    }
+
+    .message h2 {
+        font-size: 30px;
+        margin-bottom: 22px;
+    }
+
+    .dear {
+        font-size: 35px;
+        margin-bottom: 18px;
+    }
+
+    .message p {
+        font-size: 22px;
+        line-height: 1.65;
+        margin-bottom: 18px;
+    }
+
+    .message .love {
+        font-size: 25px;
+        line-height: 1.5;
+    }
+
+
+    /* Envelope */
+
+    .envelope-heart {
+        font-size: 30px;
+    }
+
+    .envelope-front p {
+        font-size: 20px;
+    }
+
+
+    /* Instructions */
+
+    .instructions {
+        margin-top: 30px;
+        font-size: 17px;
+    }
+}
+
+/* Front cover sits above Page 1 before opening */
+.card-front.opening {
+    z-index: 10;
+}
+
+/* Front cover sits underneath Page 3 when returning */
+.card-front.return-page {
+    z-index: 3;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.birthday-gif {
+    width: 180px;
+    height: auto;
+    max-width: 75%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+    .birthday-gif {
+        width: 150px;
+        max-width: 65%;
+    }
+}
+
+.page-next {
+    position: absolute;
+    right: 18px;
+    bottom: 15px;
+    font-size: 13px;
+    color: #7c3aed;
+    font-weight: 600;
+    opacity: 0.75;
+}
+
+@media (max-width: 600px) {
+    .page-next {
+        right: 14px;
+        bottom: 12px;
+        font-size: 16px;
+    }
+}
