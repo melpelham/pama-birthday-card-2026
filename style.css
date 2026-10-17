@@ -740,11 +740,10 @@ body {
     pointer-events: none;
 }
 
-.birthday-gif {
-    width: 180px;
-    height: auto;
-    max-width: 75%;
-    border-radius: 15px;
+.laughing-emoji {
+    font-size: 100px;
+    line-height: 1.2;
+    text-align: center;
     margin-bottom: 15px;
 }
 
