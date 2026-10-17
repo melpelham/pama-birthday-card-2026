@@ -12,8 +12,8 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(
         135deg,
-        #dbeafe,
-        #c4b5fd
+        #a7f3d0,
+        #d1fae5"
     );
     overflow: hidden;
 }
@@ -249,7 +249,7 @@ body {
 }
 
 .dear {
-    color: #7c3aed;
+    color: #16a34a;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 18px;
@@ -263,7 +263,7 @@ body {
 }
 
 .message .love {
-    color: #6d28d9;
+    color: #16a34a;
     font-size: 19px;
     font-weight: bold;
     margin-top: 10px;
@@ -437,7 +437,7 @@ body {
     position: absolute;
     inset: 0;
 
-    background: #ddd6fe;
+    background: #86efac;
 
     clip-path:
         polygon(
@@ -483,7 +483,7 @@ body {
     position: absolute;
     inset: 0;
 
-    background: #a78bfa;
+    background: #86efac;
 
     clip-path:
         polygon(
@@ -760,7 +760,7 @@ body {
     right: 18px;
     bottom: 15px;
     font-size: 13px;
-    color: #7c3aed;
+    color: #16a34a;
     font-weight: 600;
     opacity: 0.75;
 }
